@@ -6,4 +6,3 @@ class Library:
         self.name = name
 
 library1 = ("Library of New York")
-

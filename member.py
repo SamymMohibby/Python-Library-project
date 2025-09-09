@@ -1,5 +1,6 @@
 import random
 from library import Library
+import json
 
 class Member:
     letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -12,6 +13,11 @@ class Member:
         Library.memberList.append(self.memberID)
         Member.members.append(self)
 
+    def to_dict(self):
+        return {
+            "Name": self.name,
+            "Member ID": self.memberID
+        }
 
 member1 = Member("Samppa")
 member2 = Member("James")
@@ -25,3 +31,7 @@ member9 = Member("Celia")
 member10 = Member("Grigory")
 member11 = Member("Noah")
 member12 = Member("Kamal")
+
+
+with open("members.json", "w") as outfile:
+    json.dump([member.to_dict() for member in Member.members], outfile, indent=2)

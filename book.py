@@ -1,4 +1,5 @@
 from library import *
+import json
 
 class Book:
     
@@ -8,7 +9,13 @@ class Book:
         self.year = year
         Library.bookList.append(self)
     
-
+    def to_dict(self):
+        return {
+            "Title": self.title,
+            "Author": self.author,
+            "Year": self.year
+        }
+    
 book1 = Book("Harry Potter", "Samym Mohibby", 2002)
 book2 = Book("A song of ice and fire", "Leanne Llena", 2001)
 book3 = Book("The Hobbit", "J.R.R. Tolkien", 1937)
@@ -31,3 +38,7 @@ book19 = Book("Les Misérables", "Victor Hugo", 1862)
 book20 = Book("Don Quixote", "Miguel de Cervantes", 1605)
 book21 = Book("Fahrenheit 451", "Ray Bradbury", 1953)
 book22 = Book("Dracula", "Bram Stoker", 1897)
+
+
+with open("books.json", "w") as outfile:
+    json.dump([book.to_dict() for book in Library.bookList], outfile, indent=2)
